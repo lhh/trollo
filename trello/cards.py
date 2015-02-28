@@ -8,8 +8,32 @@ class Cards(object):
         self._apikey = apikey
         self._token = token
 
-    def get(self, card_id, actions=None, action_fields=None, action_limit=None, attachments=None, attachment_fields=None, members=None, member_fields=None, checkItemStates=None, checkItemState_fields=None, checklists=None, checklist_fields=None, fields=None):
-        resp = requests.get("https://trello.com/1/cards/%s" % (card_id), params=dict(key=self._apikey, token=self._token, actions=actions, action_fields=action_fields, action_limit=action_limit, attachments=attachments, attachment_fields=attachment_fields, members=members, member_fields=member_fields, checkItemStates=checkItemStates, checkItemState_fields=checkItemState_fields, checklists=checklists, checklist_fields=checklist_fields, fields=fields), data=None)
+    def copy(self, card_id, list_id):
+        resp = requests.post("https://trello.com/1/cards",
+                             params=dict(key=self._apikey, token=self._token,
+                                         idList=list_id, idCardSource=card_id))
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
+    def get(self, card_id, actions=None, action_fields=None, action_limit=None,
+            attachments=None, attachment_fields=None, members=None,
+            member_fields=None, checkItemStates=None,
+            checkItemState_fields=None, checklists=None, checklist_fields=None,
+            fields=None):
+        resp = requests.get("https://trello.com/1/cards/%s" % (card_id),
+                            params=dict(key=self._apikey, token=self._token,
+                                        actions=actions,
+                                        action_fields=action_fields,
+                                        action_limit=action_limit,
+                                        attachments=attachments,
+                                        attachment_fields=attachment_fields,
+                                        members=members,
+                                        member_fields=member_fields,
+                                        checkItemStates=checkItemStates,
+                                        checkItemState_fields=checkItemState_fields,
+                                        checklists=checklists,
+                                        checklist_fields=checklist_fields,
+                                        fields=fields), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
 
@@ -153,4 +177,4 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
-    
+
