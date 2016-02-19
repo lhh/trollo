@@ -142,6 +142,11 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def new_label_idLabel(self, card_id_or_shortlink, value):
+        resp = requests.post("https://trello.com/1/cards/%s/idLabels" % (card_id_or_shortlink), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
     def new_member(self, card_id, value):
         resp = requests.post("https://trello.com/1/cards/%s/members" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
         resp.raise_for_status()
@@ -164,6 +169,11 @@ class Cards(object):
 
     def delete_label_color(self, color, card_id):
         resp = requests.delete("https://trello.com/1/cards/%s/labels/%s" % (card_id, color), params=dict(key=self._apikey, token=self._token), data=None)
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
+    def delete_label_idLabel(self, idLabel, card_id_or_shortlink):
+        resp = requests.delete("https://trello.com/1/cards/%s/idLabels/%s" % (card_id_or_shortlink, idLabel), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
 
