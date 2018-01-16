@@ -132,8 +132,8 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
-    def new_checklist(self, card_id, value):
-        resp = requests.post("https://trello.com/1/cards/%s/checklists" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
+    def new_checklist(self, card_id, name):
+        resp = requests.post("https://trello.com/1/cards/%s/checklists" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(name=name))
         resp.raise_for_status()
         return json.loads(resp.content)
 
