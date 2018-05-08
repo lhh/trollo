@@ -29,8 +29,7 @@ setuptools.setup(
     long_description=dedent("""\
         Python Trello API Wrapper
         --------------------------
-
-        This Python API is simply a wrapper around the Trello API
+        This Python API is simply a wrapper around the Trello API.
 
         Getting Started:
         ----------------
@@ -46,11 +45,11 @@ setuptools.setup(
         --------------
         You can find documentation for the Python API at:
 
-            http://packages.python.org/trollo/
+            http://pypi.org/project/trollo/
 
         And documentation for the Trello API at:
 
-            https://trello.com/docs/api/
+            https://developers.trello.com/reference/
 
         """),
     author='Red Hat',
