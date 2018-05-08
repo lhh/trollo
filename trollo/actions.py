@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 class Actions(object):
     __module__ = 'trello'
 
@@ -77,5 +78,3 @@ class Actions(object):
         resp = requests.get("https://trello.com/1/actions/%s/organization/%s" % (action_id, field), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
-
-    

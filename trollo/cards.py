@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 class Cards(object):
     __module__ = 'trello'
 
@@ -186,5 +187,3 @@ class Cards(object):
         resp = requests.delete("https://trello.com/1/cards/%s/membersVoted/%s" % (card_id, idMember), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
-
-

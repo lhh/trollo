@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 class Types(object):
     __module__ = 'trello'
 
@@ -12,5 +13,3 @@ class Types(object):
         resp = requests.get("https://trello.com/1/types/%s" % (id), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
-
-    

@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 class Lists(object):
     __module__ = 'trello'
 
@@ -67,5 +68,3 @@ class Lists(object):
         resp = requests.post("https://trello.com/1/lists/%s/cards" % (list_id), params=dict(key=self._apikey, token=self._token), data=dict(name=name, desc=desc))
         resp.raise_for_status()
         return json.loads(resp.content)
-
-    

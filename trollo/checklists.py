@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 class Checklists(object):
     __module__ = 'trello'
 

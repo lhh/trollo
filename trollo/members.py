@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 class Members(object):
     __module__ = 'trello'
 
@@ -102,5 +103,3 @@ class Members(object):
         resp = requests.put("https://trello.com/1/members/%s/initials" % (member_id_or_username), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
         resp.raise_for_status()
         return json.loads(resp.content)
-
-    
