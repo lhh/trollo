@@ -33,8 +33,8 @@ python setup.py install
 
 ## Documentation
 
-TBD. The documentation for hacking (e.g. implementing new Trello APIs) is
-[here](https://developers.trello.com/reference/)
+The documentation for hacking (e.g. implementing new Trello APIs) is
+[here](https://developers.trello.com/reference/).
 
 ## Contributing
 
@@ -48,3 +48,7 @@ Please fork and issue pull requests.
 ## License
 
 This project is licensed under the BSD 2-clause license - see the [LICENSE.txt](LICENSE.txt) file for details
+
+## Acknowledgements
+
+The original source code for TrelloPy is [here](https://developers.kilnhg.com/Code/Trello/Group/TrelloPy).
