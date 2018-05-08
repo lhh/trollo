@@ -4,7 +4,7 @@ import requests
 
 
 class Lists(object):
-    __module__ = 'trello'
+    __module__ = 'trollo'
 
     def __init__(self, apikey, token=None):
         self._apikey = apikey
