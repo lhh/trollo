@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# Copyright (c) 2012, Fog Creek Software, Inc.
+# Copyright (c) 2016-2018, Red Hat, Inc.
+#   License: 2-clause BSD; see LICENSE.txt for details
 from .actions import Actions
 from .boards import Boards
 from .cards import Cards

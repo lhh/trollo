@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# Copyright (c) 2012, Fog Creek Software, Inc.
+# Copyright (c) 2016-2018, Red Hat, Inc.
+#   License: 2-clause BSD; see LICENSE.txt for details
 import json
 import requests
 
@@ -69,5 +72,3 @@ class Checklists(object):
         resp = requests.delete("https://trello.com/1/checklists/%s/checkItems/%s" % (checklist_id, idCheckItem), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
-
-    
