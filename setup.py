@@ -1,11 +1,28 @@
-from distutils.core import setup
+#!/usr/bin/env python
+import setuptools
+import re
 
 from textwrap import dedent
+from trollo import __version__
 
-setup(name='trello',
-      version='0.9.1',
-      packages=['trello'],
-      license=dedent("""\
+
+def requires(prefix=''):
+    """Retrieve requirements from requirements.txt
+    """
+    try:
+        reqs = map(str.strip, open(prefix + 'requirements.txt').readlines())
+        reqs = filter(lambda s: re.match(r'\W', s), reqs)
+        return reqs
+    except Exception:
+        pass
+    return []
+
+
+setuptools.setup(
+    name='trollo',
+    version=__version__,
+    install_requires=requires(),
+    license=dedent("""\
         Copyright (c) 2012, Fog Creek Software, Inc.
         All rights reserved.
 
@@ -29,8 +46,8 @@ setup(name='trello',
         (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
         SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         """),
-      description='Python library for interacting with the Trello API',
-      long_description=dedent("""\
+    description='Python library for interacting with the Trello API',
+    long_description=dedent("""\
         Python Trello API Wrapper
         --------------------------
 
@@ -44,41 +61,37 @@ setup(name='trello',
 
         or by using pip
 
-          $ pip install trello
+          $ pip install trollo
 
         Documentation:
         --------------
         You can find documentation for the Python API at:
 
-            http://packages.python.org/trello/
+            http://packages.python.org/trollo/
 
         And documentation for the Trello API at:
 
             https://trello.com/docs/api/
 
         """),
-      author='Fog Creek Software',
-      author_email='customer-service@fogcreek.com',
-      maintainer='Fog Creek Software',
-      maintainer_email='customer-service@fogcreek.com',
-      url='https://trello.com/',
-      download_url='https://developers.kilnhg.com/Repo/Trello/Group/TrelloPy',
-      install_requires=['requests>=0.9.1'],
-      requires='requests',
-      classifiers=[
-          'Development Status :: 4 - Beta',
-          'Intended Audience :: Developers',
-          'Natural Language :: English',
-          'Operating System :: MacOS :: MacOS X',
-          'Operating System :: Microsoft :: Windows',
-          'Operating System :: POSIX',
-          'Operating System :: POSIX :: BSD',
-          'Operating System :: POSIX :: Linux',
-          'Programming Language :: Python',
-          'Topic :: Internet :: WWW/HTTP',
-          'Topic :: Software Development',
-          'Topic :: Software Development :: Libraries',
-          'Topic :: Software Development :: Libraries :: Python Modules',
-          'Topic :: Utilities',
-      ],
+    author='Fog Creek Software',
+    author_email='customer-service@fogcreek.com',
+    maintainer='Lon Hohberger',
+    maintainer_email='lon@metamorphism.com',
+    url='https://trello.com/',
+    download_url='http://github.com/lhh/trollo',
+    classifiers=['Development Status :: 4 - Beta',
+                 'Intended Audience :: Developers',
+                 'Natural Language :: English',
+                 'Operating System :: MacOS :: MacOS X',
+                 'Operating System :: Microsoft :: Windows',
+                 'Operating System :: POSIX',
+                 'Operating System :: POSIX :: BSD',
+                 'Operating System :: POSIX :: Linux',
+                 'Programming Language :: Python',
+                 'Topic :: Internet :: WWW/HTTP',
+                 'Topic :: Software Development',
+                 'Topic :: Software Development :: Libraries',
+                 'Topic :: Software Development :: Libraries :: Python Modules',
+                 'Topic :: Utilities'],
 )

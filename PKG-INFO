@@ -1,9 +1,8 @@
 Metadata-Version: 1.1
-Name: trello
-Version: 0.9.1
+Name: trollo
+Version: 0.1.0
 Summary: Python library for interacting with the Trello API
-Home-page: https://trello.com/
-Author: Fog Creek Software
+Author: Fog Creek Software, forked by Lon Hohberger
 Author-email: customer-service@fogcreek.com
 License: Copyright (c) 2012, Fog Creek Software, Inc.
 All rights reserved.
@@ -55,7 +54,7 @@ Description: Python Trello API Wrapper
             https://trello.com/docs/api/
         
         
-Platform: UNKNOWN
+Platform: Linux
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: Natural Language :: English
@@ -70,11 +69,4 @@ Classifier: Topic :: Software Development
 Classifier: Topic :: Software Development :: Libraries
 Classifier: Topic :: Software Development :: Libraries :: Python Modules
 Classifier: Topic :: Utilities
-Requires: r
-Requires: e
-Requires: q
-Requires: u
-Requires: e
-Requires: s
-Requires: t
-Requires: s
+Requires: requests
