@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from .actions import Actions
 from .boards import Boards
 from .cards import Cards
