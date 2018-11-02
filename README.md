@@ -17,6 +17,13 @@ trello = TrelloApi(TRELLO_KEY)
 #         'key=' + TRELLO_KEY)
 trello.set_token(TOKEN)
 ```
+
+If your code already uses the old Trello module, you can simply
+change it to use Trollo:
+```
+-import trello
++import trollo
+```
 ### Prerequisites
 
 Trollo requires Requests 2.0.0 or later.
