@@ -153,7 +153,7 @@ class Cards(object):
         return json.loads(resp.content)
 
     def new_member(self, card_id, value):
-        resp = requests.post("https://trello.com/1/cards/%s/members" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
+        resp = requests.post("https://trello.com/1/cards/%s/idMembers" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
         resp.raise_for_status()
         return json.loads(resp.content)
 
