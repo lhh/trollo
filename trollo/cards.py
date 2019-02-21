@@ -117,6 +117,17 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def update_customField(self, card_id, custom_field_id, value):
+        data = None
+        if isinstance(value, dict):
+            data = dict(value=value)
+        else:
+            data = dict(idValue=value)
+
+        resp = requests.put("https://trello.com/1/cards/%s/customField/%s/item" % (card_id, custom_field_id), params=dict(key=self._apikey, token=self._token), data=data)
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
     def update_name(self, card_id, value):
         resp = requests.put("https://trello.com/1/cards/%s/name" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
         resp.raise_for_status()
