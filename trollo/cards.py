@@ -148,6 +148,14 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def move_checkItem(self, card_id, idCheckItem, position):
+        """
+        Valid postions: 'top', 'bottom' or a positive number
+        """
+        resp = requests.put("https://trello.com/1/cards/%s/checkItem/%s" % (card_id, idCheckItem), params=dict(key=self._apikey, token=self._token), data=dict(pos=str(position)))
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
     def new(self, name, idList, desc=None):
         resp = requests.post("https://trello.com/1/cards" % (), params=dict(key=self._apikey, token=self._token), data=dict(name=name, idList=idList, desc=desc))
         resp.raise_for_status()
