@@ -92,8 +92,13 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
-    def update(self, card_id, name=None, desc=None, closed=None, idList=None, due=None):
-        resp = requests.put("https://trello.com/1/cards/%s" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(name=name, desc=desc, closed=closed, idList=idList, due=due))
+    def update(self, card_id, name=None, desc=None, closed=None, idList=None, due=None, pos=None):
+        req_data = dict(name=name, desc=desc, closed=closed, idList=idList, due=due)
+
+        if pos:
+            req_data['pos'] = pos
+
+        resp = requests.put("https://trello.com/1/cards/%s" % (card_id), params=dict(key=self._apikey, token=self._token), data=req_data)
         resp.raise_for_status()
         return json.loads(resp.content)
 
@@ -114,6 +119,11 @@ class Cards(object):
 
     def update_idList(self, card_id, value):
         resp = requests.put("https://trello.com/1/cards/%s/idList" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
+    def update_pos(self, card_id, pos):
+        resp = requests.put("https://trello.com/1/cards/%s/pos" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=pos))
         resp.raise_for_status()
         return json.loads(resp.content)
 
