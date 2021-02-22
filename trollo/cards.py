@@ -3,6 +3,8 @@
 # Copyright (c) 2016-2018, Red Hat, Inc.
 #   License: 2-clause BSD; see LICENSE.txt for details
 import json
+import mimetypes
+
 import requests
 
 
@@ -178,6 +180,19 @@ class Cards(object):
 
     def new_attachment(self, card_id, url, name):
         resp = requests.post("https://trello.com/1/cards/%s/attachments" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(url=url, name=name))
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
+    def new_file_attachment(self, card_id, filename, bindata=None, mimeType=None):
+        if mimeType is None:
+            mimeType = mimetypes.guess_type(filename)
+        if mimeType is None:
+            mimeType = 'application/octet-stream'
+        if bindata is None:
+            # Throws FileNotFoundError if not found.
+            bindata = open(filename, 'rb').read()
+
+        resp = requests.post("https://trello.com/1/cards/%s/attachments" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(name=filename, file=bindata, mimeType=mimeType))
         resp.raise_for_status()
         return json.loads(resp.content)
 
