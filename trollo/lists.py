@@ -64,7 +64,7 @@ class Lists(object):
         return json.loads(resp.content)
 
     def new(self, name, idBoard):
-        resp = requests.post("https://trello.com/1/lists" % (), params=dict(key=self._apikey, token=self._token), data=dict(name=name, idBoard=idBoard))
+        resp = requests.post("https://trello.com/1/lists", params=dict(key=self._apikey, token=self._token), data=dict(name=name, idBoard=idBoard))
         resp.raise_for_status()
         return json.loads(resp.content)
 

@@ -74,7 +74,7 @@ class Organizations(object):
         return json.loads(resp.content)
 
     def new(self, name, displayName=None, desc=None, website=None):
-        resp = requests.post("https://trello.com/1/organizations" % (), params=dict(key=self._apikey, token=self._token), data=dict(name=name, displayName=displayName, desc=desc, website=website))
+        resp = requests.post("https://trello.com/1/organizations", params=dict(key=self._apikey, token=self._token), data=dict(name=name, displayName=displayName, desc=desc, website=website))
         resp.raise_for_status()
         return json.loads(resp.content)
 

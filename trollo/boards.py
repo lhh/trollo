@@ -114,7 +114,7 @@ class Boards(object):
         return json.loads(resp.content)
 
     def new(self, name, desc=None, idOrganization=None):
-        resp = requests.post("https://trello.com/1/boards" % (), params=dict(key=self._apikey, token=self._token), data=dict(name=name, desc=desc, idOrganization=idOrganization))
+        resp = requests.post("https://trello.com/1/boards", params=dict(key=self._apikey, token=self._token), data=dict(name=name, desc=desc, idOrganization=idOrganization))
         resp.raise_for_status()
         return json.loads(resp.content)
 
