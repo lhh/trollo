@@ -4,6 +4,7 @@
 #   License: 2-clause BSD; see LICENSE.txt for details
 import json
 import mimetypes
+import os
 
 import requests
 
@@ -215,11 +216,12 @@ class Cards(object):
             mimeType = 'application/octet-stream'
         if bindata is None:
             # Throws FileNotFoundError if not found.
-            bindata = open(filename, 'rb').read()
+            bindata = open(filename, 'rb')
 
-        fields = {'name': filename,
+        fn = os.path.basename(filename)
+        fields = {'name': fn,
                   'mimeType': mimeType,
-                  'file': (filename, bindata, mimeType)}
+                  'file': (fn, bindata, mimeType)}
 
         encoded = MultipartEncoder(fields)
 
