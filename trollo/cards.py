@@ -114,6 +114,9 @@ class Cards(object):
         return json.loads(resp.content)
 
     def update(self, card_id, name=None, desc=None, closed=None, idList=None, due=None, pos=None):
+        # The API crashes if you use 'True' or 'False'; muse use 1 or 0 here
+        if isinstance(closed, bool):
+            closed = int(closed)
         req_data = dict(name=name, desc=desc, closed=closed, idList=idList, due=due)
 
         if pos:
@@ -124,6 +127,9 @@ class Cards(object):
         return json.loads(resp.content)
 
     def update_closed(self, card_id, value):
+        # The API crashes if you use 'True' or 'False'; muse use 1 or 0 here
+        if isinstance(value, bool):
+            value = int(value)
         resp = requests.put("https://trello.com/1/cards/%s/closed" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
         resp.raise_for_status()
         return json.loads(resp.content)
