@@ -7,6 +7,8 @@ import mimetypes
 
 import requests
 
+from requests_toolbelt import MultipartEncoder
+
 
 class Cards(object):
     __module__ = 'trollo'
@@ -54,10 +56,27 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
-    def get_attachment(self, card_id, fields=None):
+    def get_attachments(self, card_id, fields=None):
         resp = requests.get("https://trello.com/1/cards/%s/attachments" % (card_id), params=dict(key=self._apikey, token=self._token, fields=fields), data=None)
         resp.raise_for_status()
         return json.loads(resp.content)
+
+    def get_attachment(self, card_id, attach_id, max_size=0):
+        # Download the raw data into memory if < SIZE
+        resp = requests.get("https://trello.com/1/cards/%s/attachments/%s" % (card_id, attach_id), params=dict(key=self._apikey, token=self._token, fields=None), data=None)
+        resp.raise_for_status()
+
+        attachment_info = json.loads(resp.content)
+        if max_size and attachment_info['isUpload']:
+            if attachment_info['bytes'] < max_size:
+                content_check = requests.get(attachment_info['url'], stream=True)
+                content_check.raise_for_status()
+                attachment_info['data'] = content_check.content
+            else:
+                # None = size too large or
+                attachment_info['data'] = None
+
+        return attachment_info
 
     def get_board(self, card_id, fields=None):
         resp = requests.get("https://trello.com/1/cards/%s/board" % (card_id), params=dict(key=self._apikey, token=self._token, fields=fields), data=None)
@@ -185,14 +204,20 @@ class Cards(object):
 
     def new_file_attachment(self, card_id, filename, bindata=None, mimeType=None):
         if mimeType is None:
-            mimeType = mimetypes.guess_type(filename)
+            (mimeType, _) = mimetypes.guess_type(filename)
         if mimeType is None:
             mimeType = 'application/octet-stream'
         if bindata is None:
             # Throws FileNotFoundError if not found.
             bindata = open(filename, 'rb').read()
 
-        resp = requests.post("https://trello.com/1/cards/%s/attachments" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(name=filename, file=bindata, mimeType=mimeType))
+        fields = {'name': filename,
+                  'mimeType': mimeType,
+                  'file': (filename, bindata, mimeType)}
+
+        encoded = MultipartEncoder(fields)
+
+        resp = requests.post("https://trello.com/1/cards/%s/attachments" % (card_id), params=dict(key=self._apikey, token=self._token), data=encoded, headers={'Content-Type': encoded.content_type})
         resp.raise_for_status()
         return json.loads(resp.content)
 
