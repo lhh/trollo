@@ -18,6 +18,10 @@ class Members(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def me(self):
+        # UNDOCUMENTED
+        return self.get('me')
+
     def get_field(self, field, member_id_or_username):
         resp = requests.get("https://trello.com/1/members/%s/%s" % (member_id_or_username, field), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
