@@ -18,6 +18,11 @@ class Actions(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def update(self, action_id, text):
+        resp = requests.put("https://trello.com/1/actions/%s" % (action_id), params=dict(key=self._apikey, token=self._token, text=text), data=None)
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
     def get_field(self, field, action_id):
         resp = requests.get("https://trello.com/1/actions/%s/%s" % (action_id, field), params=dict(key=self._apikey, token=self._token), data=None)
         resp.raise_for_status()
