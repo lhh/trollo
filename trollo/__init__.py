@@ -8,6 +8,7 @@ from .cards import Cards
 from .checklists import Checklists
 from .lists import Lists
 from .members import Members
+from .labels import Labels
 from .notifications import Notifications
 from .organizations import Organizations
 from .search import Search
@@ -33,6 +34,7 @@ class TrelloApi(object):
         self.checklists = Checklists(apikey, token)
         self.lists = Lists(apikey, token)
         self.members = Members(apikey, token)
+        self.labels = Labels(apikey, token)
         self.notifications = Notifications(apikey, token)
         self.organizations = Organizations(apikey, token)
         self.search = Search(apikey, token)
@@ -47,6 +49,7 @@ class TrelloApi(object):
         self.checklists._token = token
         self.lists._token = token
         self.members._token = token
+        self.labels._token = token
         self.notifications._token = token
         self.organizations._token = token
         self.search._token = token
