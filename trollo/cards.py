@@ -234,8 +234,8 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
-    def new_label(self, card_id, value):
-        resp = requests.post("https://trello.com/1/cards/%s/labels" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
+    def new_label(self, card_id, name, color=None):
+        resp = requests.post("https://trello.com/1/cards/%s/labels" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(name=name, color=color))
         resp.raise_for_status()
         return json.loads(resp.content)
 
