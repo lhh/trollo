@@ -28,6 +28,11 @@ class Boards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def get_labels(self, board_id, fields=None, limit=None):
+        resp = requests.get("https://trello.com/1/boards/%s/labels" % (board_id), params=dict(key=self._apikey, token=self._token, fields=fields, limit=limit), data=None)
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
     def get_card(self, board_id, actions=None, attachments=None, members=None, checkItemStates=None, checklists=None, filter=None, fields=None):
         resp = requests.get("https://trello.com/1/boards/%s/cards" % (board_id), params=dict(key=self._apikey, token=self._token, actions=actions, attachments=attachments, members=members, checkItemStates=checkItemStates, checklists=checklists, filter=filter, fields=fields), data=None)
         resp.raise_for_status()
