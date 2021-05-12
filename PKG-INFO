@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: trollo
-Version: 0.2.2
+Version: 0.2.3
 Summary: Python library for interacting with the Trello API
 Author: Fog Creek Software, forked by Lon Hohberger
 Author-email: customer-service@fogcreek.com
