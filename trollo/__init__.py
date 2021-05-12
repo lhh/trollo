@@ -21,7 +21,7 @@ if sys.version_info < (3, 0):
 else:
     from urllib.parse import quote_plus
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 
 class TrelloApi(object):
