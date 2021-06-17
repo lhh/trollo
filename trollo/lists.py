@@ -72,3 +72,8 @@ class Lists(object):
         resp = requests.post("https://trello.com/1/lists/%s/cards" % (list_id), params=dict(key=self._apikey, token=self._token), data=dict(name=name, desc=desc))
         resp.raise_for_status()
         return json.loads(resp.content)
+
+    def archive_all_cards(self, list_id):
+        resp = requests.post("https://trello.com/1/lists/%s/archiveAllCards" % (list_id), params=dict(key=self._apikey, token=self._token), data=dict(id=list_id))
+        resp.raise_for_status()
+        return json.loads(resp.content)
