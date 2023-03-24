@@ -145,6 +145,14 @@ class Cards(object):
         resp.raise_for_status()
         return json.loads(resp.content)
 
+    def update_dueComplete(self, card_id, value):
+        # The API crashes if you use 'True' or 'False'; muse use 1 or 0 here
+        if isinstance(value, bool):
+            value = int(value)
+        resp = requests.put("https://trello.com/1/cards/%s/dueComplete" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
+        resp.raise_for_status()
+        return json.loads(resp.content)
+
     def update_idList(self, card_id, value):
         resp = requests.put("https://trello.com/1/cards/%s/idList" % (card_id), params=dict(key=self._apikey, token=self._token), data=dict(value=value))
         resp.raise_for_status()
